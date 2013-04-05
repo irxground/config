@@ -1,0 +1,4 @@
+set completion-ignore-case on
+"\C-P": history-search-backward
+"\C-N": history-search-forward
+
