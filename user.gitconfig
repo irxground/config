@@ -1,4 +1,10 @@
 [color]
-	ui = true
+	ui = auto
+[log]
+  decorate = short
 [push]
 	default = upstream
+[pull]
+	rebase = true
+[rebase]
+  stat = true

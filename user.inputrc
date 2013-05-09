@@ -1,4 +1,6 @@
 set completion-ignore-case on
+set revert-all-at-newline on
+
 "\C-P": history-search-backward
 "\C-N": history-search-forward
 
