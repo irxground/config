@@ -7,6 +7,7 @@ for i in user.*; do
   if [ "$src" = "$(readlink "$dst")" ]; then
     echo "Skip: $dst"
   else
+    printf "ln -i -s %s %s\n" "$src" "$dst"
     ln -i -s "$src" "$dst"
   fi
 done
