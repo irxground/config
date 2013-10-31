@@ -1,10 +1,5 @@
 # vim: ft=sh
 
-# ---- alias ----
-#
-
-
-
 case "${OSTYPE}" in
 darwin*)
   alias ls="ls -G"
@@ -17,6 +12,9 @@ esac
 alias ll="ls -al"
 alias vi="vim"
 alias gitpull="git pull --rebase --stat --prune"
+function mkcd() {
+  mkdir -p $1 && cd $1
+}
 
 function try_read() {
   if [ -r "$1" ]; then
