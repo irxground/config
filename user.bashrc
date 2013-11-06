@@ -12,6 +12,7 @@ esac
 alias ll="ls -al"
 alias vi="vim"
 alias gitpull="git pull --rebase --stat --prune"
+alias gitammend="git commit --amend --no-edit"
 function mkcd() {
   mkdir -p $1 && cd $1
 }
