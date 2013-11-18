@@ -23,6 +23,8 @@ esac
 
 alias ll="ls -al"
 alias vi="vim"
+alias grep="grep -i"
+alias gitll="git ls-files"
 alias gitpull="git pull --rebase --stat --prune"
 alias gitammend="git commit --amend --no-edit"
 function mkcd() {

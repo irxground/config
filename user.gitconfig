@@ -1,3 +1,8 @@
+[include]
+  path = .gitconfig_local
+[core]
+	excludesfile = /Users/daichi/.gitignore
+  editor = vim
 [color]
 	ui = auto
 [log]
@@ -8,3 +13,4 @@
 	rebase = true
 [rebase]
   stat = true
+  
