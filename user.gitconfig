@@ -1,7 +1,7 @@
 [include]
   path = .gitconfig_local
 [core]
-	excludesfile = /Users/daichi/.gitignore
+	excludesfile = ~/.gitignore
   editor = vim
 [color]
 	ui = auto
@@ -13,4 +13,7 @@
 	rebase = true
 [rebase]
   stat = true
-  
+[pager]
+  log = diff-highlight | less
+  show = diff-highlight | less
+  diff = diff-highlight | less

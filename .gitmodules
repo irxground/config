@@ -1,3 +1,6 @@
 [submodule "completion-ruby"]
 	path = completion-ruby
 	url = https://github.com/mernen/completion-ruby.git
+[submodule "git"]
+	path = git
+	url = https://github.com/git/git.git
