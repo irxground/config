@@ -1,3 +1,9 @@
+#
+# This file configure shortcut key.
+#
+# After modified, pushkeys "Ctrl+x -> Ctrl+r" to reload.
+#
+
 set completion-ignore-case on
 set revert-all-at-newline on
 
