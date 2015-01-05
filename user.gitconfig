@@ -1,19 +1,20 @@
 [include]
-  path = .gitconfig_local
+	path = .gitconfig_local
 [core]
 	excludesfile = ~/.gitignore
-  editor = vim
+	editor = vim
+	quotepath = false
 [color]
 	ui = auto
 [log]
-  decorate = short
+	decorate = short
 [push]
-	default = upstream
+	default = current
 [pull]
 	rebase = true
 [rebase]
-  stat = true
+	stat = true
 [pager]
-  log = diff-highlight | less
-  show = diff-highlight | less
-  diff = diff-highlight | less
+	log = diff-highlight | less
+	show = diff-highlight | less
+	diff = diff-highlight | less

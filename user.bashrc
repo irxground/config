@@ -12,7 +12,7 @@ case "${OSTYPE}" in
 darwin*)
   alias ls="ls -G"
   function rmattr() {
-    xattr -d com.apple.metadata:kMDItemWhereFroms $@
+    # xattr -d com.apple.metadata:kMDItemWhereFroms $@
     xattr -d com.apple.quarantine $@
   }
   ;;
@@ -23,15 +23,19 @@ esac
 
 alias ..="cd .."
 alias ll="ls -al"
+alias ls-files="tree -if"
 alias vi="vim"
 alias cp="cp -i"
 alias rm="rm -i"
 alias grep="grep -i"
+alias tree="tree -C"
 alias ip="ifconfig | grep inet | tr -d '\t' | sort"
-alias gitll="git ls-files"
-alias gitadd='git add -A'
-alias gitpull="git pull --rebase --stat --prune"
-alias gitammend="git commit --amend --no-edit"
+alias git-ll="git ls-files"
+alias git-add='git add -A'
+alias git-pull="git pull --rebase --stat --prune"
+alias gitpull="git-pull"
+alias git-ammend="git commit --amend --no-edit"
+alias git-delete-branch="git branch --merged | grep -v '*' | xargs -I % git branch -d %"
 function mkcd() {
   mkdir -p $1 && cd $1
 }

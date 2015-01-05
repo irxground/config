@@ -1,0 +1,21 @@
+#!/bin/sh
+exec ruby -S -x $0 "$@"
+
+#! ruby
+port = Integer(ARGV[0]) rescue 3000
+begin
+  require 'thin'
+  Thin::Server.start port, Rack::Directory.new('.')
+rescue LoadError
+  begin
+    require 'webrick'
+    s = WEBrick::HTTPServer.new :Port => port, :DocumentRoot => '.'
+    trap('INT') { s.shutdown }
+    s.start
+  rescue LoadError
+    remark = lambda {|x| "\e[31m#{x}\e[00m" }
+    warn "Please install #{remark['thin']} or #{remark['WEBrick']}."
+    exit 1
+  end
+end
+# vim: ft=ruby
