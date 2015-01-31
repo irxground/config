@@ -1,5 +1,7 @@
 # vim: ft=sh
 
+export HISTCONTROL=ignoredups
+
 function try_read() {
   if [ -r "$1" ]; then
     . $1
@@ -43,14 +45,12 @@ function mkcd() {
 export PATH=$HOME/bin:$PATH
 
 if which brew > /dev/null; then . "$(brew --prefix)/etc/bash_completion"; fi
-try_read "$GIT_COMPLETION/git-prompt.sh"
-try_read "$GIT_COMPLETION/git-completion.bash"
-try_read ~/work/config/completion-ruby/completion-ruby-all
-if which npm > /dev/null; then . <(npm completion); fi
+
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 if which nodenv > /dev/null; then eval "$(nodenv init -)"; fi
 if which plenv > /dev/null; then eval "$(plenv init -)"; fi
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+if which npm > /dev/null; then . <(npm completion); fi
 
 export GIT_PS1_SHOWDIRTYSTATE=true
 PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\n\$ '

@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/bash
 
 echo "*** Install dotfile ***"
 cd $(dirname $0)
