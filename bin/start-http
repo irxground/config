@@ -2,7 +2,7 @@
 exec ruby -S -x $0 "$@"
 
 #! ruby
-port = Integer(ARGV[0]) rescue 3000
+port = Integer(ARGV[0]) rescue 4000
 begin
   require 'thin'
   Thin::Server.start port, Rack::Directory.new('.')

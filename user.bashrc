@@ -14,7 +14,7 @@ case "${OSTYPE}" in
 darwin*)
   alias ls="ls -G"
   function rmattr() {
-    # xattr -d com.apple.metadata:kMDItemWhereFroms $@
+    xattr -d com.apple.metadata:kMDItemWhereFroms $@
     xattr -d com.apple.quarantine $@
   }
   ;;
@@ -51,6 +51,12 @@ if which nodenv > /dev/null; then eval "$(nodenv init -)"; fi
 if which plenv > /dev/null; then eval "$(plenv init -)"; fi
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 if which npm > /dev/null; then . <(npm completion); fi
+
+# nodebrew
+if which nodebrew > /dev/null; then
+  PATH=$HOME/.nodebrew/current/bin:$PATH
+  NODEBREW_ROOT=$(brew --prefix)/var/nodebrew
+fi
 
 export GIT_PS1_SHOWDIRTYSTATE=true
 PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\n\$ '

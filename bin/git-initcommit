@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if ! git config user.name > /dev/null; then
+  echo "please set user.name"
+  exit 1
+fi
+
+if ! git config user.email > /dev/null; then
+  echo "please set user.email"
+  exit 1
+fi
+
+if git log > /dev/null 2>&1; then
+  echo "this repo already commited"
+  exit 1
+fi
+
+git commit --allow-empty -m "Initial commit"
+
+#set ft=sh
