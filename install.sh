@@ -26,3 +26,10 @@ do
   make_link "${PWD}/bin/$i" "${HOME}/bin/$i"
 done
 
+if which brew > /dev/null; then
+  cd "$HOME/bin"
+  echo "*** Install bin (brew) ***"
+  ln -s $(brew --prefix)/share/git-core/contrib/workdir/git-new-workdir
+  ln -s $(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight
+fi
+
