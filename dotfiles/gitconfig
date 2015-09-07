@@ -9,15 +9,11 @@
 [log]
 	decorate = short
 [push]
-	default = current
+	default = simple
 [pull]
 	rebase = true
 [rebase]
 	stat = true
-[pager]
-	log = diff-highlight | less
-	show = diff-highlight | less
-	diff = diff-highlight | less
 [fetch]
 	prune = true
 [grep]

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+fname=screenshot-$(date +%s).png
+fpath=/sdcard/$fname
+adb shell screencap -p "$fpath"
+adb pull "$fpath"
+adb shell rm "$fpath"
+
+# vim: ft=sh

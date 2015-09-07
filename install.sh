@@ -7,7 +7,7 @@ function make_link() {
   if [ "$_src" = "$(readlink "$_dst")" ]; then
     echo "Skip: $_src"
   else
-    printf "ln -i -s %s %s\n" "$_src" "$_dst"
+    printf "ln -s %s %s\n" "$_src" "$_dst"
     ln -s "$_src" "$_dst"
   fi
 }
@@ -29,7 +29,9 @@ done
 if which brew > /dev/null; then
   cd "$HOME/bin"
   echo "*** Install bin (brew) ***"
-  ln -s $(brew --prefix)/share/git-core/contrib/workdir/git-new-workdir
-  ln -s $(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight
+  if which brew > /dev/null; then
+    ln -s $(brew --prefix)/share/git-core/contrib/workdir/git-new-workdir
+    ln -s $(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight
+  fi
 fi
 
