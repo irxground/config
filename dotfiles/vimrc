@@ -46,6 +46,7 @@ if isdirectory( expand("~/.vim/bundle/neobundle.vim")  )
 
   NeoBundle 'derekwyatt/vim-scala'
   NeoBundle 'rust-lang/rust.vim'
+  NeoBundle 'cespare/vim-toml'
   NeoBundle 'kana/vim-filetype-haskell'
 
   call neobundle#end()

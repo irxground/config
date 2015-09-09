@@ -49,19 +49,22 @@ alias rake-db-migrate-redo='rake db:migrate:redo'
 export PATH=$HOME/bin:$PATH
 export GREP_OPTIONS='--color=auto'
 
-if which brew > /dev/null; then . "$(brew --prefix)/etc/bash_completion"; fi
-
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-if which nodenv > /dev/null; then eval "$(nodenv init -)"; fi
-if which plenv > /dev/null; then eval "$(plenv init -)"; fi
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-if which npm > /dev/null; then . <(npm completion); fi
+if which brew > /dev/null 2>&1; then . "$(brew --prefix)/etc/bash_completion"; fi
+if which rbenv > /dev/null 2>&1; then eval "$(rbenv init -)"; fi
+if which nodenv > /dev/null 2>&1; then eval "$(nodenv init -)"; fi
+if which plenv > /dev/null 2>&1; then eval "$(plenv init -)"; fi
+if which pyenv > /dev/null 2>&1; then eval "$(pyenv init -)"; fi
+if which npm > /dev/null 2>&1; then . <(npm completion); fi
 
 # nodebrew
-if which nodebrew > /dev/null; then
+if which nodebrew > /dev/null 2>&1; then
   PATH=$HOME/.nodebrew/current/bin:$PATH
   NODEBREW_ROOT=$(brew --prefix)/var/nodebrew
 fi
 
 export GIT_PS1_SHOWDIRTYSTATE=true
-PS1='\[\033[32m\]\u\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\n\$ '
+if type __git_ps1 > /dev/null 2>&1; then
+  PS1='\[\033[32m\]\u\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\n\$ '
+else
+  PS1='\[\033[32m\]\u\[\033[00m\]:\[\033[34m\]\w\n\$ '
+fi
