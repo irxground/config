@@ -1,5 +1,9 @@
 #!/bin/bash
 
+function has() {
+  type "$1" > /dev/null 2>&1
+}
+
 function make_link() {
   local _src=$1
   local _dst=$2
@@ -26,7 +30,7 @@ do
   make_link "${PWD}/bin/$i" "${HOME}/bin/$i"
 done
 
-if which brew > /dev/null; then
+if has brew; then
   cd "$HOME/bin"
   echo "*** Install bin (brew) ***"
   if which brew > /dev/null; then
@@ -35,3 +39,8 @@ if which brew > /dev/null; then
   fi
 fi
 
+if has git; then
+  echo "*** include gitconfig_shared ***"
+  echo "git config --global include.path .gitconfig_shared"
+  git config --global include.path .gitconfig_shared
+fi

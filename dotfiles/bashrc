@@ -1,70 +1,28 @@
+export HISTCONTROL="ignorespace:erasedups"
+
+function has() {
+  type "$1" > /dev/null 2>&1
+}
+
+function try_to_source() {
+  [ -f "$1" ] && source "$1"
+}
+
+function source_all_in() {
+  if [ -d "$1" ] || [ -d "$(readlink "$1")" ]; then
+    for file in "$1"/*.sh; do
+      try_to_source "$file" || source_all_in "$file"
+    done
+    return 0
+  else
+    return 1
+  fi
+}
+
+function prepend_path() {
+  export PATH="$1:$PATH"
+}
+
+source_all_in "${HOME}/.bashrc.d"
+
 # vim: ft=sh
-
-export HISTCONTROL=ignoredups
-
-function try_read() {
-  if [ -r "$1" ]; then
-    . $1
-  fi;
-}
-
-try_read ~/.bashrc_local
-
-case "${OSTYPE}" in
-darwin*)
-  alias ls="ls -G"
-  function rmattr() {
-    xattr -d com.apple.metadata:kMDItemWhereFroms $@
-    xattr -d com.apple.quarantine $@
-  }
-  ;;
-linux*)
-  alias ls="ls --color"
-  ;;
-esac
-
-alias ..="cd .."
-alias ll="ls -al"
-alias ls-files="find ."
-alias vi="vim"
-alias grep="grep -i"
-alias less="less -S"
-alias tree="tree -C"
-alias ip="ifconfig | grep inet | tr -d '\t' | sort"
-alias git-ll="git ls-files"
-alias git-add='git add -A'
-alias git-push-new='git push --set-upstream origin `git rev-parse --abbrev-ref HEAD`'
-alias git-pull="git pull --verbose --rebase --stat --prune"
-alias git-ammend="git commit --amend --no-edit"
-alias git-delete-branch="git branch --merged | grep -v '*' | xargs -I % git branch -d %"
-alias gitpull="git-pull"
-alias gitpush="git-push-new"
-function mkcd() {
-  mkdir -p $1 && cd $1
-}
-
-alias rake-db-migrate='rake db:migrate'
-alias rake-db-migrate-redo='rake db:migrate:redo'
-
-export PATH=$HOME/bin:$PATH
-export GREP_OPTIONS='--color=auto'
-
-if which brew > /dev/null 2>&1; then . "$(brew --prefix)/etc/bash_completion"; fi
-if which rbenv > /dev/null 2>&1; then eval "$(rbenv init -)"; fi
-if which nodenv > /dev/null 2>&1; then eval "$(nodenv init -)"; fi
-if which plenv > /dev/null 2>&1; then eval "$(plenv init -)"; fi
-if which pyenv > /dev/null 2>&1; then eval "$(pyenv init -)"; fi
-if which npm > /dev/null 2>&1; then . <(npm completion); fi
-
-# nodebrew
-if which nodebrew > /dev/null 2>&1; then
-  PATH=$HOME/.nodebrew/current/bin:$PATH
-  NODEBREW_ROOT=$(brew --prefix)/var/nodebrew
-fi
-
-export GIT_PS1_SHOWDIRTYSTATE=true
-if type __git_ps1 > /dev/null 2>&1; then
-  PS1='\[\033[32m\]\u\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\n\$ '
-else
-  PS1='\[\033[32m\]\u\[\033[00m\]:\[\033[34m\]\w\n\$ '
-fi
