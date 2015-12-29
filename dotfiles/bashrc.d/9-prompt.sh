@@ -21,4 +21,4 @@ else
   PROMPT_COMMAND=""
   PS1="${__ps1_pre}${__ps1_post}"
 fi
-PS4="${__red}+${__default}"
+export PS4="${__red}+${__default} "

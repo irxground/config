@@ -1,18 +1,20 @@
+[alias]
+	ls = ls-files
 [core]
 	excludesfile = ~/.gitignore
 	editor = vim
 	quotepath = false
 [color]
 	ui = auto
-[log]
-	decorate = short
-[push]
-	default = simple
-[pull]
-	rebase = true
-[rebase]
-	stat = true
 [fetch]
 	prune = true
 [grep]
 	lineNumber = true
+[log]
+	decorate = short
+[push]
+	default = current
+[pull]
+	rebase = true
+[rebase]
+	stat = true

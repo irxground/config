@@ -2,7 +2,7 @@ begin
   require "awesome_print"
   AwesomePrint.pry!
 rescue LoadError
-  warn "\e[33mfail to load `awesome_print`\e[0m"
+  # warn "\e[33mfail to load `awesome_print`\e[0m"
 end
 
 # vim: ft=ruby
