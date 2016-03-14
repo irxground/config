@@ -9,7 +9,11 @@ begin
 rescue LoadError
   begin
     require 'webrick'
-    s = WEBrick::HTTPServer.new :Port => port, :DocumentRoot => '.'
+    s = WEBrick::HTTPServer.new({
+      BindAddress: '0.0.0.0',
+      Port: port,
+      DocumentRoot: '.',
+    })
     trap('INT') { s.shutdown }
     s.start
   rescue LoadError
