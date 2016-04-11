@@ -52,7 +52,6 @@ if isdirectory( expand("~/.vim/bundle/neobundle.vim")  )
   NeoBundle 'kana/vim-filetype-haskell'
   NeoBundle 'elixir-lang/vim-elixir'
   NeoBundle 'rhysd/vim-crystal'
-  NeoBundle 'fatih/vim-go'
 
   NeoBundle 'szw/vim-tags'
 
