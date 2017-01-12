@@ -1,5 +1,3 @@
-alias cd="silent-pushd"
-alias dirs="dirs -v"
 alias ls="ls -G"
 alias ll="ls -al"
 alias diff="diff -u"
@@ -12,10 +10,6 @@ alias be="bundle exec"
 
 # for Mac OS
 has ldd || alias ldd="otool -L"
-
-function silent-pushd() {
-  pushd "$@" > /dev/null
-}
 
 function reload-alias() {
   source "$BASH_SOURCE"

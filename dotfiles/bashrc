@@ -20,7 +20,9 @@ function source_all_in() {
 }
 
 function prepend_path() {
-  export PATH="$1:$PATH"
+  if [ -d "$1" ]; then
+    export PATH="$1:$PATH"
+  fi
 }
 
 source_all_in "${HOME}/.bashrc.d"
