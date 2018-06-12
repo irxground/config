@@ -54,7 +54,7 @@ if has brew; then
   cd "$HOME/bin"
   echo "*** Install bin (brew) ***"
   if which brew > /dev/null; then
-    make_link $(brew --prefix)/share/git-core/contrib/workdir/git-new-workdir
+    # make_link $(brew --prefix)/share/git-core/contrib/workdir/git-new-workdir
     make_link $(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight
   fi
 fi

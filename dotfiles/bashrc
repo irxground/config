@@ -1,22 +1,9 @@
-export HISTCONTROL="ignorespace:erasedups"
+# vim: ft=sh
+
+# ---- ---- ---- ---- UTIL ---- ---- ---- ----
 
 function has() {
   type "$1" > /dev/null 2>&1
-}
-
-function try_to_source() {
-  [ -f "$1" ] && source "$1"
-}
-
-function source_all_in() {
-  if [ -d "$1" ] || [ -d "$(readlink "$1")" ]; then
-    for file in "$1"/*.sh; do
-      try_to_source "$file" || source_all_in "$file"
-    done
-    return 0
-  else
-    return 1
-  fi
 }
 
 function prepend_path() {
@@ -25,6 +12,61 @@ function prepend_path() {
   fi
 }
 
-source_all_in "${HOME}/.bashrc.d"
+function setup_xenv() {
+  local name="$1"
+  local dir="$HOME/.${name}"
+  if [ -d "$dir" ]; then
+    eval "$($name init -)"
+  fi
+}
 
-# vim: ft=sh
+# ---- ---- ---- ---- PATH & CONST ---- ---- ---- ----
+export HISTCONTROL="ignorespace:erasedups"
+export LSCOLORS=DxGxcxdxCxegedabagacad
+
+setup_xenv rbenv
+setup_xenv pyenv
+prepend_path "$HOME/.cargo/bin"
+prepend_path "$HOME/bin"
+
+if has brew; then
+  . $(brew --prefix)/etc/bash_completion
+fi
+
+# ---- ---- ---- ---- ALIAS ---- ---- ---- ----
+alias ll="ls -al"
+alias diff="diff -u"
+alias vim-sjis="vim -c ':e ++enc=cp932'"
+alias vim-eucjp="vim -c ':e ++enc=euc-jp'"
+alias colordiff="colordiff -u"
+alias git-ammend="git commit --amend --no-edit"
+alias git-branch="git branch --sort=-committerdate"
+alias git-delete-branch="git branch --merged|egrep -v '\\*|develop|master'|xargs git branch -d"
+alias be="bundle exec"
+alias tree="exa -T"
+
+# ---- ---- ---- ---- PROMPT ---- ---- ---- ----
+__reset='\e[0m'
+__u='\e[4m'
+__red='\e[31m'
+__green='\e[32m'
+__yellow='\e[33m'
+__blue='\e[34m'
+__cyan='\e[36m'
+__default='\e[39m'
+
+__ps1_pre="${__green}${__u}\u${__default}@${__yellow}\h${__default}:${__cyan}\w${__reset}"
+__ps1_post="\n\$ "
+
+if has __git_ps1; then
+  GIT_PS1_SHOWDIRTYSTATE=1
+  GIT_PS1_SHOWUNTRACKEDFILES=1
+  GIT_PS1_SHOWUPSTREAM="verbose"
+  GIT_PS1_SHOWCOLORHINTS=1
+  PROMPT_COMMAND='__git_ps1 "$__ps1_pre" "$__ps1_post"'
+  PS1=""
+else
+  PROMPT_COMMAND=""
+  PS1="${__ps1_pre}${__ps1_post}"
+fi
+export PS4="${__red}+${__default} "
