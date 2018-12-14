@@ -21,3 +21,5 @@
 [rebase]
 	stat = true
 	autostash = true
+[branch]
+	sort = -committerdate

@@ -5,7 +5,9 @@
 #
 
 set completion-ignore-case on
-set revert-all-at-newline on
+set bell-style none
+set visible-stats on
+
 
 "\C-P": history-search-backward
 "\C-N": history-search-forward

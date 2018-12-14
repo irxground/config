@@ -15,7 +15,7 @@ function prepend_path() {
 function setup_xenv() {
   local name="$1"
   local dir="$HOME/.${name}"
-  if [ -d "$dir" ]; then
+  if command -v $name >/dev/null && [ -d "$dir" ]; then
     eval "$($name init -)"
   fi
 }
@@ -23,26 +23,32 @@ function setup_xenv() {
 # ---- ---- ---- ---- PATH & CONST ---- ---- ---- ----
 export HISTCONTROL="ignorespace:erasedups"
 export LSCOLORS=DxGxcxdxCxegedabagacad
+export HOMEBREW_NO_AUTO_UPDATE=1
 
+# prepend_path "$HOME/xbin"
 setup_xenv rbenv
 setup_xenv pyenv
+prepend_path "$HOME/.ienv/bin"
+prepend_path "$HOME/.composer/vendor/bin"
 prepend_path "$HOME/.cargo/bin"
 prepend_path "$HOME/bin"
 
-if has brew; then
-  . $(brew --prefix)/etc/bash_completion
-fi
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
 # ---- ---- ---- ---- ALIAS ---- ---- ---- ----
-alias ll="ls -al"
+alias ls='lsd'
+alias ll="lsd -lF"
 alias diff="diff -u"
 alias vim-sjis="vim -c ':e ++enc=cp932'"
 alias vim-eucjp="vim -c ':e ++enc=euc-jp'"
 alias colordiff="colordiff -u"
 alias git-ammend="git commit --amend --no-edit"
-alias git-branch="git branch --sort=-committerdate"
 alias git-delete-branch="git branch --merged|egrep -v '\\*|develop|master'|xargs git branch -d"
+alias git-force-pull='git reset --hard $(git rev-parse --abbrev-ref --symbolic-full-name @{u})'
+alias git-fuzzy-checkout="git branch | fzf | xargs git checkout"
+alias rsync-git='rsync -C --filter=":- .gitignore"'
 alias be="bundle exec"
+alias column="column"
 alias tree="exa -T"
 
 # ---- ---- ---- ---- PROMPT ---- ---- ---- ----

@@ -9,11 +9,13 @@ set listchars=tab:￫\
 " ** operation **
 set incsearch
 set hlsearch
-set backspace=indent,start
+" set backspace=indent,start
 
 " ** tab setting **
-set expandtab
-set tabstop=2 shiftwidth=2 softtabstop=2
+set expandtab " タブキーでスペースを入力/禁止
+set tabstop=4     " タブ文字の表示幅
+set shiftwidth=2  " インデント幅
+set softtabstop=2 " expandtabするときのスペースの量
 set autoindent
 
 " ** colorize **
